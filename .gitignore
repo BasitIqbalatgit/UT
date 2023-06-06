@@ -25,3 +25,6 @@ hs_err_pid*
 /User Interfaces/nbproject/private/
 /JavaApplication1/build/
 /JavaApplication1/nbproject/private/
+/UI/nbproject/private/
+/UI/build/
+/UI/dist/
