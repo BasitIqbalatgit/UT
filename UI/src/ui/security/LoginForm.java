@@ -1,7 +1,8 @@
-package ui;
+package ui.security;
 
 import common.UserDTO;
 import controller.Controller;
+import ui.dashboard.TeacherDash;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -133,7 +134,7 @@ public class LoginForm extends javax.swing.JFrame {
             UserDTO user = new UserDTO(userName,password);
         if(Controller.verifyUser(user)){
             this.dispose();
-            new Dashboard().setVisible(true);
+            new TeacherDash().setVisible(true);
         }
         
         

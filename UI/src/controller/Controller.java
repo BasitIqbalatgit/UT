@@ -5,10 +5,7 @@ import common.UserDTO;
 import model.Authentication;
 import model.MySQLConnection;
 
-/**
- *
- * @author CUI
- */
+
 public class Controller {
     static Authentication authenticate = new Authentication();
    
@@ -17,7 +14,5 @@ public class Controller {
         return authenticate.verifyUser(user);
         
     }
-    
-    
     
 }
