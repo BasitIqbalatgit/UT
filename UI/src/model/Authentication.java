@@ -11,10 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import static model.MySQLConnection.getConnection;
 
-/**
- *
- * @author CUI
- */
+
 public class Authentication {
     
     public boolean verifyUser(UserDTO user) {
