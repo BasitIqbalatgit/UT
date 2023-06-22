@@ -4,10 +4,9 @@
  */
 package UI.dashboard;
 
-/**
- *
- * @author fatim
- */
+import ui.dashboard.AddCourses;
+
+
 public class AdminDash extends javax.swing.JFrame {
 
     /**
@@ -277,7 +276,11 @@ public class AdminDash extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
+  
+      AddCourses add = new AddCourses();
+                    add.setVisible(true);  
+                    
+this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton17ActionPerformed
 
     /**
