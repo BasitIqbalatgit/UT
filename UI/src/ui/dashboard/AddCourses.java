@@ -4,6 +4,8 @@
  */
 package ui.dashboard;
 
+import common.CourseDTO;
+
 /**
  *
  * @author CUI
@@ -315,6 +317,9 @@ public class AddCourses extends javax.swing.JFrame {
                     .addGap(100, 100, 100)))
         );
 
+        jTextField1.getAccessibleContext().setAccessibleName("");
+        jTextField1.getAccessibleContext().setAccessibleDescription("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -380,7 +385,10 @@ public class AddCourses extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
+       CourseDTO courseobj=new CourseDTO();
+       courseobj.courseName=jTextField1.getText();
+       courseobj.id=jTextField2.getText();
+       courseobj.creditHours=jTextField3.get
     }//GEN-LAST:event_jButton20ActionPerformed
 
     /**
