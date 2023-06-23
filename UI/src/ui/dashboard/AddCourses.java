@@ -388,7 +388,7 @@ public class AddCourses extends javax.swing.JFrame {
        CourseDTO courseobj=new CourseDTO();
        courseobj.courseName=jTextField1.getText();
        courseobj.id=jTextField2.getText();
-       courseobj.creditHours=jTextField3.get
+//       courseobj.creditHours=jTextField3.get
     }//GEN-LAST:event_jButton20ActionPerformed
 
     /**
