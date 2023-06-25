@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import common.UserDTO;
+import common.utils.UserDTO;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;

@@ -4,7 +4,7 @@
  */
 package ui.dashboard;
 
-import common.CourseDTO;
+import common.utils.CourseDTO;
 
 /**
  *

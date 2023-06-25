@@ -1,7 +1,7 @@
 
 package controller;
 
-import common.UserDTO;
+import common.utils.UserDTO;
 import model.Authentication;
 import model.MySQLConnection;
 

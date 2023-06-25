@@ -4,7 +4,7 @@
  */
 package model;
 
-import common.UserDTO;
+import common.utils.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
