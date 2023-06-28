@@ -5,7 +5,7 @@
 package model;
 
 import controller.UTController;
-
+import DAL.DALManager;
 
 
 public class UTFactory {
@@ -17,5 +17,12 @@ public class UTFactory {
         return new Response();
     }
     
+//    public static Authenticate getInstanceOfAuthenticate(){
+//        return new Authenticate();
+//    }
+//    
+    public static DALManager getInstanceOfDALManager(){
+        return new DALManager();
+    }
     
 }

@@ -1,13 +1,14 @@
 package ui.security;
 
 import UI.dashboard.AdminDash;
+import common.session.AppSession;
 import common.utils.UserDTO;
 import controller.UTController;
 import javax.swing.JOptionPane;
 import model.Response;
-import ui.dashboard.AddCourses;
 import ui.dashboard.StudentDash;
 import ui.dashboard.TeacherDash;
+
 
 public class Login extends javax.swing.JFrame {
 
@@ -114,30 +115,35 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        
         UserDTO user = new UserDTO();
+        // 1. indirection
+        //2. pure fabrication
         user.username = jTextField1.getText();
         user.password = new String(jPasswordField1.getPassword());
 
         Response objResponse = UTController.validateUser(user);
+        // MVC = model view Controller
 
         if (objResponse.hasError()) {
             String errorMessage = objResponse.getErrorMessages();
             JOptionPane.showMessageDialog(null, errorMessage, "Invalid Credentials", JOptionPane.ERROR_MESSAGE);
         } else {
+            AppSession session = AppSession.getInstance(user);
             // User is authorized, perform navigation to the respective dashboard based on user type
-            String userType = objResponse.getUserType();
+            String userType = UTController.getUserType();
             switch (userType) {
                 case "Admin":
-                    AdminDash adminDashboard= new AdminDash();
+                    AdminDash adminDashboard= new AdminDash(session);
                     adminDashboard.setVisible(true);
                     break;
                 case "Student":
-                    StudentDash studentDashboard = new StudentDash();
+                    StudentDash studentDashboard = new StudentDash(session);
                     studentDashboard.setVisible(true);
                     break;
                 case "Teacher":
                     
-                    TeacherDash teacherDashboard = new TeacherDash();
+                    TeacherDash teacherDashboard = new TeacherDash(session);
                     teacherDashboard.setVisible(true);
                     break;
             }

@@ -4,6 +4,9 @@
  */
 package ui.dashboard;
 
+import common.session.AppSession;
+import ui.security.Login;
+
 /**
  *
  * @author fatim
@@ -13,11 +16,19 @@ public class StudentDash extends javax.swing.JFrame {
     /**
      * Creates new form StudentDash
      */
-    public StudentDash() {
+    public StudentDash(AppSession session ) {
+        if(session ==null || session.getCurrentUser() ==null){
+            Login loginScreen   = new Login();
+             loginScreen.setVisible(true);
+            this.dispose();
+        }
+        else{
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Student Timetable");
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,6 +165,10 @@ public class StudentDash extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        Login loginScreen = new Login();
+            loginScreen.setVisible(true);
+            this.dispose();
+            
     }//GEN-LAST:event_jButton12ActionPerformed
 
     /**
@@ -186,7 +201,9 @@ public class StudentDash extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentDash().setVisible(true);
+                AppSession session=null;
+                 StudentDash studentDashboard = new StudentDash(session);
+            
             }
         });
     }

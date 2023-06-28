@@ -9,17 +9,30 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author CUI
  */
-public class MySQLConnection {
-    public static String URL="jdbc:mysql://localhost:3306/universitytimetable";
-    public static String USERNAME="root";
-    public static String PASSWORD="BasitIqbal@050";
-    
-    public static Connection getConnection() throws SQLException{
+public class MySQLConnection implements IConnection{
+    public static String URL;
+    public static String USERNAME;
+    public static String PASSWORD;
+    public MySQLConnection (String url, String username, String password){
+        this.URL=url;
+        this.USERNAME=username;
+        this.PASSWORD=password;
+        
+    }
+    @Override
+    public  Connection getConnection() {
+        try {
             return DriverManager.getConnection(URL,USERNAME,PASSWORD) ;
+        } catch (Exception ex) {
+            System.out.println("Error TRace in getConnection() : "+ ex.getMessage());
+        }
+        return null;        
     }
     
     

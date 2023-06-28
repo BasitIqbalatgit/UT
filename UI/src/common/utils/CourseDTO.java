@@ -5,11 +5,7 @@ public class CourseDTO {
     public String id;
     public int creditHours;
     
-    public CourseDTO(String cName, String id, int cHour){
-        courseName=cName;
-        this.id=id;
-        this.creditHours=cHour;
-    }
+    
     
     public String getCourseName(){
         return courseName;

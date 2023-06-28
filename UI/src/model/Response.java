@@ -41,10 +41,5 @@ public class Response {
         return !hasError();
     }
     
-   public static String getUserType() {
-    UserDTO user = new UserDTO();
-    String type = user.getType();
-       System.out.println("Type of Usr is "+ type);
-    return type;
-}
+
 }

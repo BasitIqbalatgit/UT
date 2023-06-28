@@ -4,7 +4,12 @@
  */
 package ui.dashboard;
 
+import UI.dashboard.AdminDash;
 import common.utils.CourseDTO;
+import controller.UTController;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.UTFactory;
 
 /**
  *
@@ -12,16 +17,45 @@ import common.utils.CourseDTO;
  */
 public class AddCourses extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddCourses
-     */
-    public AddCourses() {
+    
+    
+    private static AdminDash ObjectMainUI;
+    public AddCourses(AdminDash aThis) {       
         initComponents();
+        ObjectMainUI=aThis;
         setTitle("Add Semester Courses");
        this.setLocationRelativeTo(null);
        
+       
+       UTController objController = UTFactory.getInstanceOfController();
+       ArrayList<CourseDTO> list = objController.viewCourses();
+        PopulateDataFromDatabase(list);
     }
-
+    
+    
+DefaultTableModel dtm;    
+    private void PopulateDataFromDatabase(ArrayList<CourseDTO> list) {
+        dtm = new DefaultTableModel();
+        try {
+            dtm.addColumn("Course ID");
+            dtm.addColumn("Course Name");
+            dtm.addColumn("Credit Hours");
+            for(CourseDTO emp : list)
+            {
+                Object [] rowData = new Object[4];
+                rowData[0] = emp.id;
+                rowData[1] = emp.courseName;
+                rowData[2] = emp.creditHours;
+                
+                dtm.addRow(rowData);
+            }
+            jTable1.setModel(dtm);
+        }
+        catch (Exception e) {
+            System.out.println("Error Trace in getConnection() : " + e.getMessage());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -382,7 +416,7 @@ public class AddCourses extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCourses().setVisible(true);
+                new AddCourses(ObjectMainUI).setVisible(true);
             }
         });
     }

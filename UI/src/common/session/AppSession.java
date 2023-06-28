@@ -1,21 +1,36 @@
 
 package common.session;
 
+import common.utils.UserDTO;
+
 public class AppSession {
     private static AppSession instance;
+    UserDTO currentUser;
 
-    private AppSession() {
-        // Private constructor to prevent direct instantiation
+    private AppSession(UserDTO cUser) {
+     currentUser = cUser;
     }
 
-    public static synchronized AppSession getInstance() {
+    public static synchronized AppSession getInstance(UserDTO cUser) {
         if (instance == null) {
-            instance = new AppSession();
+            instance = new AppSession(cUser);
         }
         return instance;
     }
+    
+    
+    public static boolean isAuthorized(){
+        if(instance == null){
+            return false;
+        }
+        return true;
+    }
 
-    // Other methods and properties of the AppSession class
-    // ...
+    public Object getCurrentUser() {
+        return currentUser;
+    }
+    
+    
+    
 }
 

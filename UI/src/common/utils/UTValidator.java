@@ -10,7 +10,7 @@ import model.MessageType;
 import model.Response;
 
 public class UTValidator {
-    public static void verifyUser(UserDTO objUser, Response objResponse) {
+    public static void validateUser(UserDTO objUser, Response objResponse) {
         isValidName(objUser.username, objResponse);
         isValidName(objUser.password, objResponse);
         
