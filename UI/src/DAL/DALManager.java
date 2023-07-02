@@ -5,6 +5,7 @@
 package DAL;
 
 import common.utils.CourseDTO;
+import common.utils.UserDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -27,5 +28,12 @@ public class DALManager {
         Connection dbConnection = objConnection.getConnection();
         ResultSet result = objReader.getRecords("SELECT * FROM courses", dbConnection);
         return objMapper.getCourses(result);
+    }
+    
+    
+    public UserDTO getUserResult(UserDTO user){
+         Connection dbConnection = objConnection.getConnection();
+         ResultSet result=objReader.getUserResultFromQuery("SELECT * FROM user WHERE username= ? and password= ?", dbConnection,user);
+         return objMapper.getUser(result);
     }
 }

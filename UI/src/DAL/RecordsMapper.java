@@ -5,8 +5,10 @@
 package DAL;
 
 import common.utils.CourseDTO;
+import common.utils.UserDTO;
 import static java.lang.Integer.parseInt;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -29,9 +31,25 @@ public class RecordsMapper {
                 emplist.add(objCourse);
             }
         }catch (Exception e){
+            e.printStackTrace();
         }
         return emplist;
     }
+    
+    
+     UserDTO getUser(ResultSet rs) {
+    UserDTO user = new UserDTO();
+    try {
+        if (rs.next()) {
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setType(rs.getString("type"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return user;
+}
     
 }
 

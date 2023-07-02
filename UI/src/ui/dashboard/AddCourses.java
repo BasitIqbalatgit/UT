@@ -231,7 +231,6 @@ DefaultTableModel dtm;
                 .addGap(17, 17, 17))
         );
 
-        jTable1.setForeground(new java.awt.Color(204, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -264,7 +263,6 @@ DefaultTableModel dtm;
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable1.setGridColor(new java.awt.Color(0, 204, 204));
         jTable1.setSelectionBackground(new java.awt.Color(204, 255, 255));
-        jTable1.setShowGrid(true);
         jTable1.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
