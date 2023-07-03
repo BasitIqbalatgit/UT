@@ -32,6 +32,7 @@ public class DALManager {
     
     
     public UserDTO getUserResult(UserDTO user){
+        System.out.println("hello i am in getUserResult in DAL Mangaer");
          Connection dbConnection = objConnection.getConnection();
          ResultSet result=objReader.getUserResultFromQuery("SELECT * FROM user WHERE username= ? and password= ?", dbConnection,user);
          return objMapper.getUser(result);

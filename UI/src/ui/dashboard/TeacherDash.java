@@ -173,7 +173,8 @@ public class TeacherDash extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-        System.out.println("first");
+        
+        AppSession.disposeInstance();
         Login loginScreen = new Login();
             loginScreen.setVisible(true);
             this.dispose();

@@ -11,7 +11,6 @@ import model.Message;
 import model.MessageType;
 import model.UTFactory;
 import model.Response;
-import java.sql.ResultSet;
 
 
 public class UTController {
@@ -48,7 +47,8 @@ public class UTController {
      
      public static String getUserType(){
          UserDTO user = new UserDTO();
-    String type = user.getType();       
+    String type = user.getType();
+         System.out.println("The user type in getUserTupe in Controller is : "+ type);
     return type;
          
      }

@@ -8,7 +8,9 @@ import javax.swing.JOptionPane;
 import model.Response;
 import ui.dashboard.StudentDash;
 import ui.dashboard.TeacherDash;
-
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Login extends javax.swing.JFrame {
 
@@ -29,20 +31,22 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0, 150));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));  // Greenish blue shaded color
+
+//           jPanel1.setPreferredSize(new java.awt.Dimension(400, 0)); // Set the preferred width of the panel
 
         jLabel2.setFont(new java.awt.Font("Harrington", 1, 36));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(1, 43, 22));
         jLabel2.setText("Login");
 
         jLabel3.setFont(new java.awt.Font("Book Antiqua", 1, 18));
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(1, 43, 22));
         jLabel3.setText("User Name :");
 
         jLabel4.setFont(new java.awt.Font("Book Antiqua", 1, 18));
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(1, 43, 22));
         jLabel4.setText("Password :");
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
@@ -51,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1.setBackground(new java.awt.Color(204, 204, 204));
         jPasswordField1.setFont(new java.awt.Font("Arial", 0, 14));
 
-        jButton1.setBackground(new java.awt.Color(153, 0, 204));
+        jButton1.setBackground(new java.awt.Color(2, 87, 44));
         jButton1.setFont(new java.awt.Font("Colonna MT", 1, 18));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Login");
@@ -65,7 +69,7 @@ public class Login extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -103,20 +107,40 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 370, 340));
+        getContentPane().add(jPanel1);
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\SEMESTERS\\4th semeter\\OOSE\\PROJECT\\User Interfaces\\Wallpaper iPhone_calendar June 2017⚪️.png"));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 680));
-        jLabel1.getAccessibleContext().setAccessibleDescription("");
+        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\SEMESTERS\\4th semeter\\OOSE\\PROJECT\\UT\\back.jpg"));
+        getContentPane().add(jLabel1);
 
-        setSize(new java.awt.Dimension(756, 720));
+        pack();
+        setResizable(false);
         setLocationRelativeTo(null);
+        
+        // Adjust the height of the frame to match the image height
+        Image image = Toolkit.getDefaultToolkit().getImage("E:\\SEMESTERS\\4th semeter\\OOSE\\PROJECT\\UT\\back.jpg");
+        if (image != null) {
+            int imageHeight = image.getHeight(this);
+            if (imageHeight > 0) {
+                Dimension currentSize = getSize();
+                currentSize.height = imageHeight;
+                setSize(currentSize);
+            }
+        }
+        
+        // Calculate the total width of the frame
+//        image = Toolkit.getDefaultToolkit().getImage("E:\\SEMESTERS\\4th semeter\\OOSE\\PROJECT\\UT\\back.jpg");
+        int imageWidth = image.getWidth(this);
+        int panelWidth = jPanel1.getPreferredSize().width;
+        int totalWidth = imageWidth + panelWidth;
+
+        // Set the preferred size of the frame to the total width
+        Dimension preferredSize = new Dimension(totalWidth, getHeight());
+        setPreferredSize(preferredSize);
+        setSize(preferredSize);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        
-        UserDTO user = new UserDTO();
+            UserDTO user = new UserDTO();
         // 1. indirection
         //2. pure fabrication
         user.username = jTextField1.getText();
@@ -132,10 +156,10 @@ public class Login extends javax.swing.JFrame {
             AppSession session = AppSession.getInstance(user);
             // User is authorized, perform navigation to the respective dashboard based on user type
             String userType = UTController.getUserType();
-            System.out.println("user Type is "+ userType);
+            System.out.println("user Type is " + userType);
             switch (userType) {
                 case "Admin":
-                    AdminDash adminDashboard= new AdminDash(session);
+                    AdminDash adminDashboard = new AdminDash(session);
                     adminDashboard.setVisible(true);
                     break;
                 case "Student":
@@ -143,12 +167,12 @@ public class Login extends javax.swing.JFrame {
                     studentDashboard.setVisible(true);
                     break;
                 case "Teacher":
-                    
+
                     TeacherDash teacherDashboard = new TeacherDash(session);
                     teacherDashboard.setVisible(true);
                     break;
                 default:
-                    System.out.println("There is some erorr");
+                    System.out.println("There is some error");
             }
             this.dispose(); // Close the login form after successful login
         }

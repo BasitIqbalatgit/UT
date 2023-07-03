@@ -33,10 +33,12 @@ public class DBReader {
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setString(1, user.getUsername());
         statement.setString(2, user.getPassword());
-        System.out.println("Executing query: " + statement.toString()); // Debug statement
+        System.out.println("Executing query in DBReader: " + statement.toString()); // Debug statement
+             System.out.println("i am in db reader");
         return statement.executeQuery();
     } catch (SQLException e) {
-        e.printStackTrace();
+        
+        System.out.println("i am in db readexceptinerer");
     }
     return null;
 }

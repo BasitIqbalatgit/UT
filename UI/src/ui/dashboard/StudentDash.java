@@ -165,6 +165,7 @@ public class StudentDash extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        AppSession.disposeInstance();
         Login loginScreen = new Login();
             loginScreen.setVisible(true);
             this.dispose();

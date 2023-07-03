@@ -20,16 +20,16 @@ public class AppSession {
     
     
     public static boolean isAuthorized(){
-        if(instance == null){
-            return false;
-        }
-        return true;
+        return instance != null;
     }
 
     public Object getCurrentUser() {
         return currentUser;
     }
     
+    public static void disposeInstance(){
+        instance = null;
+    }
     
     
 }
