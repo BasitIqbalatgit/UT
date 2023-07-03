@@ -2,13 +2,14 @@ package ui.dashboard;
 
 import common.session.AppSession;
 import javax.swing.*;
+import services.UTAuthorizationService;
 import ui.security.Login;
 
 public class TeacherDash extends javax.swing.JFrame {
 
     public TeacherDash(AppSession session) {
-        if (session == null || session.getCurrentUser() == null) {
-            // Session is not created or user is not logged in
+       if (session == null ||session.getCurrentUser()==null|| !UTAuthorizationService.hasAccess(session.getCurrentUser().getType(), "TeacherDashboard")) {
+                 // Session is not created or user is not logged in
             // Redirect the user to the login screen
             Login loginScreen = new Login();
             loginScreen.setVisible(true);

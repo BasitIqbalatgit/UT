@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 
 public class DALManager {
-    IConnection objConnection;
+    //Sepration of Concerns
+    IConnection objConnection;//Program to interface rather than implementation
     DBReader objReader;
     RecordsMapper objMapper;
     //RecordsMapper mapper

@@ -5,22 +5,27 @@
 package UI.dashboard;
 
 import common.session.AppSession;
+import common.utils.UserDTO;
+import services.UTAuthorizationService;
 import ui.dashboard.AddCourses;
 import ui.security.Login;
 
 
 public class AdminDash extends javax.swing.JFrame {
 
-    /**
+/**
      * Creates new form AdminDash
+     * @param session
      */
-    AppSession session;
-    public AdminDash(AppSession session) {
-        if(session == null || session.getCurrentUser () == null){
-            Login loginScreen = new Login();
-            loginScreen.setVisible(true);
-            this.dispose();
-        }
+        public AdminDash(AppSession session) {
+          if (session == null ||session.getCurrentUser()==null|| !UTAuthorizationService.hasAccess(session.getCurrentUser().getType(), "AdminDashboard")) {
+              Login loginScreen = new Login();
+              loginScreen.setVisible(true);
+              this.dispose();
+              return; // Exit the constructor if access is denied
+          } else {
+          }
+
         initComponents();
         setTitle("University Timetable");
         this.setLocationRelativeTo(null);

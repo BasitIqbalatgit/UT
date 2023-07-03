@@ -23,7 +23,7 @@ public class AppSession {
         return instance != null;
     }
 
-    public Object getCurrentUser() {
+    public UserDTO getCurrentUser() {
         return currentUser;
     }
     

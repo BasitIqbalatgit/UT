@@ -27,8 +27,10 @@ public class AddCourses extends javax.swing.JFrame {
        this.setLocationRelativeTo(null);
        
        
-       UTController objController = UTFactory.getInstanceOfController();
-       ArrayList<CourseDTO> list = objController.viewCourses();
+       UTController objController = UTFactory.getInstanceOfController();//Creator Principle
+       
+       ArrayList<CourseDTO> list = objController.viewCourses();//Pure fabrication for courseDTO
+       
         PopulateDataFromDatabase(list);
     }
     
