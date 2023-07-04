@@ -1,5 +1,6 @@
 package ui.security;
 
+
 import UI.dashboard.AdminDash;
 import common.session.AppSession;
 import common.utils.UserDTO;
@@ -176,7 +177,7 @@ public class Login extends javax.swing.JFrame {
             this.dispose(); // Close the login form after successful login
         }
     }
-
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
