@@ -5,6 +5,7 @@
 package ui.dashboard;
 
 import common.session.AppSession;
+import services.UTAuthorizationService;
 import ui.security.Login;
 
 /**
@@ -17,8 +18,8 @@ public class StudentDash extends javax.swing.JFrame {
      * Creates new form StudentDash
      */
     public StudentDash(AppSession session ) {
-        if(session ==null || session.getCurrentUser() ==null){
-            Login loginScreen   = new Login();
+       if (session == null ||session.getCurrentUser()==null|| !UTAuthorizationService.hasAccess(session.getCurrentUser().getType(), "StudentDashboard")) {
+                 Login loginScreen   = new Login();
              loginScreen.setVisible(true);
             this.dispose();
         }
