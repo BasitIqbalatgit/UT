@@ -167,7 +167,6 @@ public class Login extends javax.swing.JFrame {
                     studentDashboard.setVisible(true);
                     break;
                 case "Teacher":
-
                     TeacherDash teacherDashboard = new TeacherDash(session);
                     teacherDashboard.setVisible(true);
                     break;

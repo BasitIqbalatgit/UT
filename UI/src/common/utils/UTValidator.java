@@ -12,13 +12,21 @@ import model.Response;
 public class UTValidator {
     public static void validateUser(UserDTO objUser, Response objResponse) {
         isValidName(objUser.username, objResponse);
-        isValidName(objUser.password, objResponse);
+        if(objResponse.isSuccessfull()){
+        isValidPassword(objUser.password, objResponse);
+        }
         
     }
 
     private static void isValidName(String nameToValidate, Response objResponse) {
         if(nameToValidate == null || nameToValidate.length() < 3 || nameToValidate.length()>20){
             objResponse.messagesList.add(new Message("User Name OR Password is not valid, Provide valid crdentials with at least 3 characters and atmost 20 characters.",MessageType.Error));
+        }
+        
+    }
+    private static void isValidPassword(String passwordToValidate, Response objResponse) {
+        if(passwordToValidate == null || passwordToValidate.length() < 3 || passwordToValidate.length()>9){
+            objResponse.messagesList.add(new Message("User Name OR Password is not valid, Provide valid crdentials with at least 3 characters and atmost 8 characters.",MessageType.Error));
         }
         
     }

@@ -26,13 +26,14 @@ public class UTController {
           System.out.println("hello to the future");
           Response responce = UTFactory.getInstanceOfResponce();
           // 4. Creator
-          Authenticate authenticate =UTFactory.getInstanceOfAuthenticate();
-          
+         
           UTValidator.validateUser(user, responce);
           // 5. Sepration of Concerns
           // 6. information expert 
           
           if(responce.isSuccessfull()){
+               Authenticate authenticate =UTFactory.getInstanceOfAuthenticate();
+          
               if(authenticate.authenticateUser(user)==null){
                 responce.messagesList.add(new Message("Plz Enter the Correct Credentials", MessageType.Error));
               }
