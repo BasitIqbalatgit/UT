@@ -17,7 +17,7 @@ public class DALManager {
     RecordsMapper objMapper;
     //RecordsMapper mapper
     public DALManager(){
-        objConnection = new MySQLConnection("jdbc:mysql://localhost:3306/universitytimetable","root","BasitIqbal@050");
+        objConnection = new MySQLConnection("jdbc:mysql://localhost:3306/universitytimetable","root","fati1388");
         objReader=new DBReader();
         this.objMapper=new RecordsMapper();
         
