@@ -1225,8 +1225,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -176,
-											"top": -32,
+											"left": -208,
+											"top": -16,
 											"height": 13
 										},
 										{
@@ -1236,8 +1236,8 @@
 												"$ref": "AAAAAAGIat9CjJLAgUE="
 											},
 											"font": "Arial;13;1",
-											"left": 405,
-											"top": 406,
+											"left": 389,
+											"top": 414,
 											"width": 167,
 											"height": 13,
 											"text": "courses"
@@ -1250,8 +1250,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -176,
-											"top": -32,
+											"left": -208,
+											"top": -16,
 											"width": 135.103515625,
 											"height": 13,
 											"text": "(from Design Modeling)"
@@ -1264,15 +1264,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -176,
-											"top": -32,
+											"left": -208,
+											"top": -16,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 400,
-									"top": 399,
+									"left": 384,
+									"top": 407,
 									"width": 177,
 									"height": 25,
 									"stereotypeLabel": {
@@ -1291,8 +1291,8 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 400,
-							"top": 384,
+							"left": 384,
+							"top": 392,
 							"width": 177,
 							"height": 121,
 							"nameCompartment": {
@@ -1502,98 +1502,104 @@
 						},
 						{
 							"_type": "UMLPackageView",
-							"_id": "AAAAAAGJIJZ/YJImeeU=",
+							"_id": "AAAAAAGJJezvvzBkFNE=",
 							"_parent": {
 								"$ref": "AAAAAAGIaqWJ5TinyDI="
 							},
 							"model": {
-								"$ref": "AAAAAAGJIJZ/X5IkXY0="
+								"$ref": "AAAAAAGJJezvvjBiRpc="
 							},
 							"subViews": [
 								{
 									"_type": "UMLNameCompartmentView",
-									"_id": "AAAAAAGJIJZ/YJInhPk=",
+									"_id": "AAAAAAGJJezvvzBlUO4=",
 									"_parent": {
-										"$ref": "AAAAAAGJIJZ/YJImeeU="
+										"$ref": "AAAAAAGJJezvvzBkFNE="
 									},
 									"model": {
-										"$ref": "AAAAAAGJIJZ/X5IkXY0="
+										"$ref": "AAAAAAGJJezvvjBiRpc="
 									},
 									"subViews": [
 										{
 											"_type": "LabelView",
-											"_id": "AAAAAAGJIJZ/YJIoqqI=",
+											"_id": "AAAAAAGJJezvvzBm/DQ=",
 											"_parent": {
-												"$ref": "AAAAAAGJIJZ/YJInhPk="
+												"$ref": "AAAAAAGJJezvvzBlUO4="
 											},
 											"visible": false,
 											"font": "Arial;13;0",
+											"left": -64,
+											"top": -368,
 											"height": 13
 										},
 										{
 											"_type": "LabelView",
-											"_id": "AAAAAAGJIJZ/YJIpeBs=",
+											"_id": "AAAAAAGJJezvvzBn12o=",
 											"_parent": {
-												"$ref": "AAAAAAGJIJZ/YJInhPk="
+												"$ref": "AAAAAAGJJezvvzBlUO4="
 											},
 											"font": "Arial;13;1",
-											"left": 229,
-											"top": 910,
-											"width": 59.99169921875,
+											"left": 133,
+											"top": 1262,
+											"width": 591,
 											"height": 13,
-											"text": "Package1"
+											"text": "DAL"
 										},
 										{
 											"_type": "LabelView",
-											"_id": "AAAAAAGJIJZ/YJIqHQg=",
+											"_id": "AAAAAAGJJezvvzBoHL0=",
 											"_parent": {
-												"$ref": "AAAAAAGJIJZ/YJInhPk="
+												"$ref": "AAAAAAGJJezvvzBlUO4="
 											},
 											"visible": false,
 											"font": "Arial;13;0",
+											"left": -64,
+											"top": -368,
 											"width": 135.103515625,
 											"height": 13,
 											"text": "(from Design Modeling)"
 										},
 										{
 											"_type": "LabelView",
-											"_id": "AAAAAAGJIJZ/YJIr+c8=",
+											"_id": "AAAAAAGJJezvvzBpZMY=",
 											"_parent": {
-												"$ref": "AAAAAAGJIJZ/YJInhPk="
+												"$ref": "AAAAAAGJJezvvzBlUO4="
 											},
 											"visible": false,
 											"font": "Arial;13;0",
+											"left": -64,
+											"top": -368,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 224,
-									"top": 903,
-									"width": 69.99169921875,
+									"left": 128,
+									"top": 1255,
+									"width": 601,
 									"height": 25,
 									"stereotypeLabel": {
-										"$ref": "AAAAAAGJIJZ/YJIoqqI="
+										"$ref": "AAAAAAGJJezvvzBm/DQ="
 									},
 									"nameLabel": {
-										"$ref": "AAAAAAGJIJZ/YJIpeBs="
+										"$ref": "AAAAAAGJJezvvzBn12o="
 									},
 									"namespaceLabel": {
-										"$ref": "AAAAAAGJIJZ/YJIqHQg="
+										"$ref": "AAAAAAGJJezvvzBoHL0="
 									},
 									"propertyLabel": {
-										"$ref": "AAAAAAGJIJZ/YJIr+c8="
+										"$ref": "AAAAAAGJJezvvzBpZMY="
 									}
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 224,
-							"top": 888,
-							"width": 69.99169921875,
-							"height": 40,
+							"left": 128,
+							"top": 1240,
+							"width": 601,
+							"height": 305,
 							"nameCompartment": {
-								"$ref": "AAAAAAGJIJZ/YJInhPk="
+								"$ref": "AAAAAAGJJezvvzBlUO4="
 							}
 						}
 					]
@@ -1831,9 +1837,9 @@
 														"$ref": "AAAAAAGJIGFTHpBbuPo="
 													},
 													"font": "Arial;13;0",
-													"left": 40.72998046875,
+													"left": 38.55908203125,
 													"top": 13,
-													"width": 101.19775390625,
+													"width": 93.36474609375,
 													"height": 13,
 													"text": "ViewCoures(088)"
 												},
@@ -1846,7 +1852,7 @@
 													"font": "Arial;13;1",
 													"left": 21,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -3081,6 +3087,14 @@
 						"$ref": "AAAAAAGIaqPGKDiiqck="
 					},
 					"name": "Package1"
+				},
+				{
+					"_type": "UMLPackage",
+					"_id": "AAAAAAGJJezvvjBiRpc=",
+					"_parent": {
+						"$ref": "AAAAAAGIaqPGKDiiqck="
+					},
+					"name": "DAL"
 				}
 			]
 		}
