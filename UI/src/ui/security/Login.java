@@ -158,7 +158,13 @@ public class Login extends javax.swing.JFrame {
             // User is authorized, perform navigation to the respective dashboard based on user type
             String userType = UTController.getUserType();
             System.out.println("user Type is " + userType);
-            switch (userType) {
+            displayDashboard(userType, session);
+            
+            this.dispose(); // Close the login form after successful login
+        }
+    }
+    public static void displayDashboard(String userType, AppSession session){
+    switch (userType) {
                 case "Admin":
                     AdminDash adminDashboard = new AdminDash(session);
                     adminDashboard.setVisible(true);
@@ -174,8 +180,6 @@ public class Login extends javax.swing.JFrame {
                 default:
                     System.out.println("There is some error");
             }
-            this.dispose(); // Close the login form after successful login
-        }
     }
     
     public static void main(String args[]) {

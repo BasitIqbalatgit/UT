@@ -224,10 +224,8 @@ public class AdminDash extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-        AppSession.disposeInstance();
-        Login loginScreen = new Login();
-            loginScreen.setVisible(true);
-            this.dispose();
+        displayLoginPage( );
+        
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -299,6 +297,12 @@ public class AdminDash extends javax.swing.JFrame {
         });
     }
 
+     public  void displayLoginPage( ){
+    AppSession.disposeInstance();
+        Login loginScreen = new Login();
+            loginScreen.setVisible(true);
+            this.dispose();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton18;

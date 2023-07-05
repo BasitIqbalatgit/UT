@@ -174,11 +174,8 @@ public class TeacherDash extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
+        displayLoginPage( );
         
-        AppSession.disposeInstance();
-        Login loginScreen = new Login();
-            loginScreen.setVisible(true);
-            this.dispose();
     }                                         
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -226,7 +223,13 @@ public class TeacherDash extends javax.swing.JFrame {
             }
         });
     }
-
+    
+     public  void displayLoginPage( ){
+    AppSession.disposeInstance();
+        Login loginScreen = new Login();
+            loginScreen.setVisible(true);
+            this.dispose();
+    }
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
