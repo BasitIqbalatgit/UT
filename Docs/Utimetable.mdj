@@ -1837,9 +1837,9 @@
 														"$ref": "AAAAAAGJIGFTHpBbuPo="
 													},
 													"font": "Arial;13;0",
-													"left": 38.55908203125,
+													"left": 40.72998046875,
 													"top": 13,
-													"width": 93.36474609375,
+													"width": 101.19775390625,
 													"height": 13,
 													"text": "ViewCoures(088)"
 												},
@@ -1852,7 +1852,7 @@
 													"font": "Arial;13;1",
 													"left": 21,
 													"top": 13,
-													"width": 12.55908203125,
+													"width": 14.72998046875,
 													"height": 13,
 													"text": "sd"
 												}
