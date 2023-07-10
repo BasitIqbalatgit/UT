@@ -24,18 +24,25 @@ public class RecordsMapper {
         try{
         while (rs.next())
             {
-                CourseDTO objCourse=new CourseDTO();  
+                  
+              
+                
+                   CourseDTO objCourse=new CourseDTO();  
                 objCourse.id=rs.getString(1);
                 objCourse.courseName=rs.getString(2);
-                objCourse.creditHours=parseInt(rs.getString(3));
+                objCourse.courseCode=rs.getString(3);
+                objCourse.creditHours=parseInt(rs.getString(4));
                    
                 emplist.add(objCourse);
+                emplist.add(objCourse);
+                
             }
         }catch (Exception e){
-            e.printStackTrace();
         }
+        System.out.println("emplist is ;"+emplist);
         return emplist;
     }
+
     
     
      ArrayList<SlotsDTO> getSlots(ResultSet rs) {
@@ -43,12 +50,13 @@ public class RecordsMapper {
         try{
         while (rs.next())
             {
-                SlotsDTO objSlots=new SlotsDTO();  
+                SlotsDTO objSlots=new SlotsDTO(); 
+                
                 objSlots.slotsName=rs.getString(1);
                 objSlots.startTime=rs.getString(2);
                 objSlots.endTime=(rs.getString(3));
                 objSlots.duration=(rs.getString(4));   
-                
+                objSlots.id++;
                 emplist.add(objSlots);
             }
         }catch (Exception e){

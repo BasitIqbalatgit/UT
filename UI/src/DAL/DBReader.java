@@ -25,6 +25,7 @@ public class DBReader {
         }
         catch (SQLException e) {
             System.out.println("Error Trace in getRecords() : " + e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }

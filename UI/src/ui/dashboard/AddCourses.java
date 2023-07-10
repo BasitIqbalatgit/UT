@@ -6,6 +6,8 @@ package ui.dashboard;
 import common.utils.CourseDTO;
 import controller.UTController;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -23,64 +25,77 @@ import model.UTFactory;
 public class AddCourses extends javax.swing.JFrame {
 
     UTController objController;
-    
-    private static AdminDash ObjectMainUI;
-    public AddCourses(AdminDash aThis) {       
+   
+    private static AdminDash objectMainUI;
+    public AddCourses(AdminDash aThis) {
         initComponents();
-        ObjectMainUI=aThis;
+        objectMainUI = aThis;
         setTitle("Add Semester Courses");
-       this.setLocationRelativeTo(null);
-       
-       objController = UTFactory.getInstanceOfController();//Creator Principle
-       
-       ArrayList<CourseDTO> list = objController.viewCourses();//Pure fabrication for courseDTO
-       
-        PopulateDataFromDatabase(list);
+        this.setLocationRelativeTo(null);
+
+        objController = UTFactory.getInstanceOfController();
+        loadData();
+        attachCheckboxListener(); // Attach listener to handle checkbox clicks
     }
-//     private void loadData() {
-//        String searchKeyword = searchEmployee.getText();
-//        ArrayList<CourseDTO> empList = objController.viewCourses(searchKeyword);
-//        PopulateDataFromDatabase(empList);
-//    }
+
     
-DefaultTableModel dtm;    
+private void loadData(){
+ArrayList<CourseDTO> list = objController.viewCourses();
+        PopulateDataFromDatabase(list);
+}
+    DefaultTableModel dtm;
+    
     private void PopulateDataFromDatabase(ArrayList<CourseDTO> list) {
-        dtm = new DefaultTableModel(){
+        dtm = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 3;
+            public boolean isCellEditable(int row, int column) {
+                return column == 3; // Make the "Select" column editable
             }
-        }
-      ;
+        };
+
         try {
-            dtm.addColumn("Course ID");
-            dtm.addColumn("Course Name");
-            dtm.addColumn("Credit Hours");
-            dtm.addColumn("Select");
-            for(CourseDTO emp : list)
-            {
-                Object [] rowData = new Object[4];
-                rowData[0] = emp.id;
+            dtm.addColumn("CourseCode");
+            dtm.addColumn("Courses");
+            dtm.addColumn("Credit Hour");
+            dtm.addColumn("Delete"); // Checkbox column
+
+            for (CourseDTO emp : list) {
+                Object[] rowData = new Object[4];
+                rowData[0] = emp.courseCode;
                 rowData[1] = emp.courseName;
                 rowData[2] = emp.creditHours;
-                rowData[3]=true;
+                rowData[3] = false; // Default checkbox value
                 dtm.addRow(rowData);
             }
             jTable1.setModel(dtm);
-            
-           jTable1.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer(){
-               public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
-                   JCheckBox checkBox = new JCheckBox();
-                   checkBox.setSelected((boolean) value);
-                   checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-                   return checkBox;
-               }
-           });
-        }
-        catch (Exception e) {
+
+            jTable1.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    JCheckBox checkBox = new JCheckBox();
+                    checkBox.setSelected((boolean) value);
+                    checkBox.setHorizontalAlignment(SwingConstants.CENTER);
+                    return checkBox;
+                }
+            });
+        } catch (Exception e) {
             System.out.println("Error Trace in getConnection() : " + e.getMessage());
         }
     }
+    
+    private void attachCheckboxListener() {
+    jTable1.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int column = jTable1.getColumnModel().getColumnIndexAtX(e.getX()); // Get the column index of the clicked cell
+            int row = e.getY() / jTable1.getRowHeight(); // Get the row index of the clicked cell
+
+            if (row < jTable1.getRowCount() && row >= 0 && column == 3) { // Check if the click is within the bounds of the table and on the "Select" column
+                Boolean selected = (Boolean) jTable1.getValueAt(row, column);
+                jTable1.setValueAt(!selected, row, column); // Toggle the checkbox value
+            }
+        }
+    });
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,12 +122,13 @@ DefaultTableModel dtm;
         jTable1 = new javax.swing.JTable();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 10)); // NOI18N
         jLabel1.setText("Set Semester Courses");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
@@ -289,7 +305,6 @@ DefaultTableModel dtm;
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable1.setGridColor(new java.awt.Color(0, 204, 204));
         jTable1.setSelectionBackground(new java.awt.Color(204, 255, 255));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jTable1.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -298,7 +313,7 @@ DefaultTableModel dtm;
 
         jButton13.setBackground(new java.awt.Color(0, 204, 204));
         jButton13.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButton13.setText("Reset");
+        jButton13.setText("delete");
         jButton13.setBorder(null);
         jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -318,6 +333,9 @@ DefaultTableModel dtm;
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
+        jLabel2.setText("Set Semester Courses");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -331,30 +349,41 @@ DefaultTableModel dtm;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(20, Short.MAX_VALUE))))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(334, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(69, 69, 69)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(72, 72, 72)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(24, 24, 24)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(441, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -404,12 +433,12 @@ DefaultTableModel dtm;
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-         String selectedId = getSelectedEmployeeId();
+         String selectedId = getSelectedCoursesId();
         if(selectedId != null){
          JOptionPane.showMessageDialog(this, "Deleting record with "+ selectedId);
-         Response objResponse =  objController.deleteSlots(selectedId);
+         Response objResponse =  objController.deleteCourses(selectedId);
          CommonHandler.handleResponse(objResponse, jLabel1);
-//         loadData(); 
+         loadData(); 
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -447,13 +476,13 @@ DefaultTableModel dtm;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCourses(ObjectMainUI).setVisible(true);
+                new AddCourses(objectMainUI).setVisible(true);
             }
         });
     }
     
-    private String getSelectedEmployeeId() {
-        if(jTable1.getSelectedRow() > 0)
+    private String getSelectedCoursesId() {
+        if(jTable1.getSelectedRow() >= 0)
         {
         return jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
         }
@@ -462,7 +491,6 @@ DefaultTableModel dtm;
         }
         return null;
     }
-
     private javax.swing.JTextField searchEmployee;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton12;
@@ -476,6 +504,7 @@ DefaultTableModel dtm;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

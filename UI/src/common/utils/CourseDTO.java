@@ -1,8 +1,9 @@
 package common.utils;
 
 public class CourseDTO {
-    public String courseName;
     public String id;
+    public String courseName;
+    public String courseCode;
     public int creditHours;
     
     
@@ -11,8 +12,8 @@ public class CourseDTO {
         return courseName;
     }
     
-    public String getId(){
-        return id;
+    public String getCourseCode(){
+        return courseCode;
     }
     
     public int getCreditHour(){

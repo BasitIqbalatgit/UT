@@ -1,6 +1,7 @@
 package common.utils;
 
 public class SlotsDTO {
+    public static int id;
     public String slotsName;
     public String startTime;
     public String endTime;

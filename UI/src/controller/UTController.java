@@ -71,8 +71,24 @@ public ArrayList<SlotsDTO> viewSlots (){
      public Response deleteSlots(String selectedId) {
         Response objResponse = UTFactory.getInstanceOfResponce();
         objDAL.deleteSlots(selectedId, objResponse);
-         System.out.println("in delete controler"+ selectedId);
         return objResponse;
     }
+     
+     public Response deleteCourses(String selectedId) {
+        Response objResponse = UTFactory.getInstanceOfResponce();
+        objDAL.deleteCourses(selectedId, objResponse);
+        
+         System.out.println("working in controller");
+        return objResponse;
+    }
+     public Response addSlots(SlotsDTO objSlots) {
+        Response objResponse = UTFactory.getInstanceOfResponce();
+        UTValidator.validateSlots(objSlots,objResponse);
+        if(objResponse.isSuccessfull()){
+            objDAL.saveEmployee(objSlots,objResponse);
+        }
+        return objResponse;
+    }
+
     
 }

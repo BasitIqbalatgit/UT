@@ -21,12 +21,14 @@ public class DALManager {
     DBReader objReader;
     RecordsMapper objMapper;
      RecordsModifier objModifier;
+     RecordsAdder objAdder;
     //RecordsMapper mapper
     public DALManager(){
-        objConnection = new MySQLConnection("jdbc:mysql://localhost:3306/universitytimetable","root","fati1388");
+        objConnection = new MySQLConnection("jdbc:mysql://localhost:3306/universitytimetable","root","BasitIqbal@050");
         objReader=new DBReader();
         this.objMapper=new RecordsMapper();
         objModifier = new RecordsModifier();
+        objAdder = new RecordsAdder();
     }
      
     
@@ -53,18 +55,43 @@ public class DALManager {
      public Response deleteSlots(String selectedId, Response objResponse) {
          
         try{
-            System.out.println("befroe");
+            
             Connection  dbConnection = objConnection.getConnection();
-            System.out.println("after");
-            System.out.println("in deleteEmployee : "+selectedId);
             objModifier.deleteSlots(selectedId,objResponse,dbConnection);
-            System.out.println("after modifier");
             return  objResponse;           
         }catch(Exception e){
-              e.printStackTrace();
-        objResponse.messagesList.add(new Message("Ooops! Failed to delete employee, Please contact support that there an issue while saving new employee.", MessageType.Error));
+             
+        objResponse.messagesList.add(new Message("Ooops! Failed to delete Slots, Please contact support that there an issue while Deleting Slots.", MessageType.Error));
         objResponse.messagesList.add(new Message(e.getMessage() + "\n Stack Track:\n"+e.getStackTrace(), MessageType.Exception));
         }
         return null;
     }
+     public Response deleteCourses(String selectedId, Response objResponse) {
+         
+        try{
+            Connection  dbConnection = objConnection.getConnection();
+            objModifier.deleteCourses(selectedId,objResponse,dbConnection);
+            System.out.println("midi");
+            return  objResponse;           
+        }catch(Exception e){
+             System.out.println("best");
+        objResponse.messagesList.add(new Message("Ooops! Failed to delete Coursese, Please contact support that there an issue while Deleting Courses.", MessageType.Error));
+        objResponse.messagesList.add(new Message(e.getMessage() + "\n Stack Track:\n"+e.getStackTrace(), MessageType.Exception));
+        }
+        return null;
+    }
+     
+     
+     
+      public void saveEmployee(SlotsDTO objSlots, Response objResponse) {
+        try{
+            Connection  dbConnection = objConnection.getConnection();
+            objAdder.saveSlots(objSlots,objResponse,dbConnection);            
+        }catch(Exception e){
+        objResponse.messagesList.add(new Message("Ooops! Failed to create Slots, Please contact support that there an issue while saving new Slots.", MessageType.Error));
+        objResponse.messagesList.add(new Message(e.getMessage() + "\n Stack Track:\n"+e.getStackTrace(), MessageType.Exception));
+        }
+    }
+
+     
 }
