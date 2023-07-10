@@ -1,7 +1,7 @@
 package ui.security;
 
 
-import UI.dashboard.AdminDash;
+import ui.dashboard.AdminDash;
 import common.session.AppSession;
 import common.utils.UserDTO;
 import controller.UTController;

@@ -5,6 +5,7 @@
 package DAL;
 
 import common.utils.CourseDTO;
+import common.utils.SlotsDTO;
 import common.utils.UserDTO;
 import static java.lang.Integer.parseInt;
 import java.sql.ResultSet;
@@ -35,6 +36,27 @@ public class RecordsMapper {
         }
         return emplist;
     }
+    
+    
+     ArrayList<SlotsDTO> getSlots(ResultSet rs) {
+        ArrayList<SlotsDTO> emplist = new ArrayList<>();
+        try{
+        while (rs.next())
+            {
+                SlotsDTO objSlots=new SlotsDTO();  
+                objSlots.slotsName=rs.getString(1);
+                objSlots.startTime=rs.getString(2);
+                objSlots.endTime=(rs.getString(3));
+                objSlots.duration=(rs.getString(4));   
+                
+                emplist.add(objSlots);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return emplist;
+    }
+    
     
     
      UserDTO getUser(ResultSet rs) {

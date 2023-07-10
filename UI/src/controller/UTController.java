@@ -5,6 +5,7 @@ import DAL.DALManager;
 import common.utils.UserDTO;
 import model.Authenticate;
 import common.utils.CourseDTO;
+import common.utils.SlotsDTO;
 import common.utils.UTValidator;
 import java.util.ArrayList;
 import model.Message;
@@ -43,7 +44,7 @@ public class UTController {
            return responce;
         
     }
-     
+//     viewSlots(){}
      
      
      public static String getUserType(){
@@ -58,10 +59,20 @@ public class UTController {
      public ArrayList<CourseDTO> viewCourses (){
          return  objDAL.getCoursesList();
      }
-     
+      
+public ArrayList<SlotsDTO> viewSlots (){
+         return  objDAL.getSlotsList();
+     }
      
      public UserDTO UserResult(UserDTO user){
          return objDAL.getUserResult(user);
      }
+     
+     public Response deleteSlots(String selectedId) {
+        Response objResponse = UTFactory.getInstanceOfResponce();
+        objDAL.deleteSlots(selectedId, objResponse);
+         System.out.println("in delete controler"+ selectedId);
+        return objResponse;
+    }
     
 }

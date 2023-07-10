@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package UI.dashboard;
+package ui.dashboard;
 
 import common.session.AppSession;
 import common.utils.UserDTO;
 import services.UTAuthorizationService;
+import services.UTAuthorizationService;
+import ui.dashboard.AddCourses;
 import ui.dashboard.AddCourses;
 import ui.security.Login;
 
@@ -237,7 +239,10 @@ public class AdminDash extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: in manage slots
+        ManageSlots manageSlots = new ManageSlots(this);
+        manageSlots.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed

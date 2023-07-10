@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ui.dashboard;
-import common.utils.CourseDTO;
+
+import common.utils.SlotsDTO;
 import controller.UTController;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -16,72 +19,85 @@ import javax.swing.table.DefaultTableModel;
 import model.Response;
 import model.UTFactory;
 
-/**
- *
- * @author CUI
- */
-public class AddCourses extends javax.swing.JFrame {
+public class ManageSlots extends javax.swing.JFrame {
 
     UTController objController;
-    
-    private static AdminDash ObjectMainUI;
-    public AddCourses(AdminDash aThis) {       
+   
+    private static AdminDash objectMainUI;
+    public ManageSlots(AdminDash aThis) {
         initComponents();
-        ObjectMainUI=aThis;
+        objectMainUI = aThis;
         setTitle("Add Semester Courses");
-       this.setLocationRelativeTo(null);
-       
-       objController = UTFactory.getInstanceOfController();//Creator Principle
-       
-       ArrayList<CourseDTO> list = objController.viewCourses();//Pure fabrication for courseDTO
-       
-        PopulateDataFromDatabase(list);
+        this.setLocationRelativeTo(null);
+
+        objController = UTFactory.getInstanceOfController();
+        loadData();
+        attachCheckboxListener(); // Attach listener to handle checkbox clicks
     }
-//     private void loadData() {
-//        String searchKeyword = searchEmployee.getText();
-//        ArrayList<CourseDTO> empList = objController.viewCourses(searchKeyword);
-//        PopulateDataFromDatabase(empList);
-//    }
+
     
-DefaultTableModel dtm;    
-    private void PopulateDataFromDatabase(ArrayList<CourseDTO> list) {
-        dtm = new DefaultTableModel(){
+private void loadData(){
+ArrayList<SlotsDTO> list = objController.viewSlots();
+        PopulateDataFromDatabase(list);
+}
+    DefaultTableModel dtm;
+    
+    private void PopulateDataFromDatabase(ArrayList<SlotsDTO> list) {
+        dtm = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
-                return column == 3;
+            public boolean isCellEditable(int row, int column) {
+                return column == 4; // Make the "Select" column editable
             }
-        }
-      ;
+        };
+
         try {
-            dtm.addColumn("Course ID");
-            dtm.addColumn("Course Name");
-            dtm.addColumn("Credit Hours");
-            dtm.addColumn("Select");
-            for(CourseDTO emp : list)
-            {
-                Object [] rowData = new Object[4];
-                rowData[0] = emp.id;
-                rowData[1] = emp.courseName;
-                rowData[2] = emp.creditHours;
-                rowData[3]=true;
+            dtm.addColumn("Slot Name");
+            dtm.addColumn("Start Time");
+            dtm.addColumn("End Time");
+            dtm.addColumn("Duration");
+            dtm.addColumn("Select"); // Checkbox column
+
+            for (SlotsDTO emp : list) {
+                Object[] rowData = new Object[5];
+                rowData[0] = emp.slotsName;
+                rowData[1] = emp.startTime;
+                rowData[2] = emp.endTime;
+                rowData[3] = emp.duration;
+                rowData[4] = false; // Default checkbox value
                 dtm.addRow(rowData);
             }
             jTable1.setModel(dtm);
-            
-           jTable1.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer(){
-               public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
-                   JCheckBox checkBox = new JCheckBox();
-                   checkBox.setSelected((boolean) value);
-                   checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-                   return checkBox;
-               }
-           });
-        }
-        catch (Exception e) {
+
+            jTable1.getColumnModel().getColumn(4).setCellRenderer(new DefaultTableCellRenderer() {
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    JCheckBox checkBox = new JCheckBox();
+                    checkBox.setSelected((boolean) value);
+                    checkBox.setHorizontalAlignment(SwingConstants.CENTER);
+                    return checkBox;
+                }
+            });
+        } catch (Exception e) {
             System.out.println("Error Trace in getConnection() : " + e.getMessage());
         }
     }
     
+    private void attachCheckboxListener() {
+    jTable1.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int column = jTable1.getColumnModel().getColumnIndexAtX(e.getX()); // Get the column index of the clicked cell
+            int row = e.getY() / jTable1.getRowHeight(); // Get the row index of the clicked cell
+
+            if (row < jTable1.getRowCount() && row >= 0 && column == 4) { // Check if the click is within the bounds of the table and on the "Select" column
+                Boolean selected = (Boolean) jTable1.getValueAt(row, column);
+                jTable1.setValueAt(!selected, row, column); // Toggle the checkbox value
+            }
+        }
+    });
+}
+
+
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,13 +123,14 @@ DefaultTableModel dtm;
         jTable1 = new javax.swing.JTable();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
-        jLabel1.setText("Set Semester Courses");
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jLabel1.setText("Manage Slots");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
@@ -298,7 +315,7 @@ DefaultTableModel dtm;
 
         jButton13.setBackground(new java.awt.Color(0, 204, 204));
         jButton13.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButton13.setText("Reset");
+        jButton13.setText("DELETE");
         jButton13.setBorder(null);
         jButton13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -309,7 +326,7 @@ DefaultTableModel dtm;
 
         jButton14.setBackground(new java.awt.Color(0, 204, 204));
         jButton14.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButton14.setText("View Semester Courses");
+        jButton14.setText("UPDATE");
         jButton14.setBorder(null);
         jButton14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -317,6 +334,9 @@ DefaultTableModel dtm;
                 jButton14ActionPerformed(evt);
             }
         });
+
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel4.setText("Manage Slots");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -326,34 +346,42 @@ DefaultTableModel dtm;
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(65, 65, 65))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(239, 239, 239))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -409,7 +437,7 @@ DefaultTableModel dtm;
          JOptionPane.showMessageDialog(this, "Deleting record with "+ selectedId);
          Response objResponse =  objController.deleteSlots(selectedId);
          CommonHandler.handleResponse(objResponse, jLabel1);
-//         loadData(); 
+         loadData(); 
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -434,26 +462,27 @@ DefaultTableModel dtm;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSlots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSlots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSlots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCourses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageSlots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCourses(ObjectMainUI).setVisible(true);
+                new ManageSlots(objectMainUI).setVisible(true);
             }
         });
     }
     
     private String getSelectedEmployeeId() {
-        if(jTable1.getSelectedRow() > 0)
+        if(jTable1.getSelectedRow() >= 0)
         {
         return jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
         }
@@ -463,7 +492,6 @@ DefaultTableModel dtm;
         return null;
     }
 
-    private javax.swing.JTextField searchEmployee;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
@@ -477,6 +505,7 @@ DefaultTableModel dtm;
     private javax.swing.JButton jButton26;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
