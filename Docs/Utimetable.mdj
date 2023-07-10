@@ -8477,6 +8477,75 @@
 									"isMultiInstance": false
 								}
 							]
+						},
+						{
+							"_type": "UMLInteraction",
+							"_id": "AAAAAAGJQbSNxpLM+t0=",
+							"_parent": {
+								"$ref": "AAAAAAGJIGFTHpBY/h8="
+							},
+							"name": "InteractionDigram",
+							"ownedElements": [
+								{
+									"_type": "UMLSequenceDiagram",
+									"_id": "AAAAAAGJQbSNxpLNFa4=",
+									"_parent": {
+										"$ref": "AAAAAAGJQbSNxpLM+t0="
+									},
+									"name": "Add Slots",
+									"ownedViews": [
+										{
+											"_type": "UMLFrameView",
+											"_id": "AAAAAAGJQbSNxpLO26E=",
+											"_parent": {
+												"$ref": "AAAAAAGJQbSNxpLNFa4="
+											},
+											"model": {
+												"$ref": "AAAAAAGJQbSNxpLNFa4="
+											},
+											"subViews": [
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGJQbSNxpLPJpw=",
+													"_parent": {
+														"$ref": "AAAAAAGJQbSNxpLO26E="
+													},
+													"font": "Arial;13;0",
+													"left": 32.72998046875,
+													"top": 13,
+													"width": 56.6435546875,
+													"height": 13,
+													"text": "Add Slots"
+												},
+												{
+													"_type": "LabelView",
+													"_id": "AAAAAAGJQbSNx5LQdxc=",
+													"_parent": {
+														"$ref": "AAAAAAGJQbSNxpLO26E="
+													},
+													"font": "Arial;13;1",
+													"left": 13,
+													"top": 13,
+													"width": 14.72998046875,
+													"height": 13,
+													"text": "sd"
+												}
+											],
+											"font": "Arial;13;0",
+											"left": 8,
+											"top": 8,
+											"width": 692,
+											"height": 337,
+											"nameLabel": {
+												"$ref": "AAAAAAGJQbSNxpLPJpw="
+											},
+											"frameTypeLabel": {
+												"$ref": "AAAAAAGJQbSNx5LQdxc="
+											}
+										}
+									]
+								}
+							]
 						}
 					],
 					"attributes": [
