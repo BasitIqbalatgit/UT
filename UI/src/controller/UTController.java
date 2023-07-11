@@ -85,7 +85,7 @@ public ArrayList<SlotsDTO> viewSlots (){
         Response objResponse = UTFactory.getInstanceOfResponce();
         UTValidator.validateSlots(objSlots,objResponse);
         if(objResponse.isSuccessfull()){
-            objDAL.saveEmployee(objSlots,objResponse);
+            objDAL.saveSlots(objSlots,objResponse);
         }
         return objResponse;
     }

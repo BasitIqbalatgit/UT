@@ -13,14 +13,12 @@ public class RecordsAdder {
 
     public void saveSlots(SlotsDTO objSlots, Response objResponse, Connection dbConnection) {
         try {
-            String query = "INSERT INTO slots (id,slotName, startTime, endTime) VALUES (?,?, ?, ?);";
+            String query = "INSERT INTO slots (slotName, startTime, endTime) VALUES (?, ?, ?);";
             PreparedStatement p = dbConnection.prepareStatement(query);
-            int id = SlotsDTO.id++;
-                String idAsString = Integer.toString(id);
-            p.setString(1,idAsString);
-            p.setString(2, objSlots.slotsName);
-            p.setString(3, objSlots.startTime);
-            p.setString(4, objSlots.endTime);
+           
+            p.setString(1, objSlots.slotsName);
+            p.setString(2, objSlots.startTime);
+            p.setString(3, objSlots.endTime);
             int rowsInserted = p.executeUpdate();
             if (rowsInserted > 0) {
                 objResponse.messagesList.add(new Message("Slot added successfully.", MessageType.Information));

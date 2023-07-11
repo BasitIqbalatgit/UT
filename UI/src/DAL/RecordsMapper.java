@@ -56,7 +56,6 @@ public class RecordsMapper {
                 objSlots.startTime=rs.getString(2);
                 objSlots.endTime=(rs.getString(3));
                 objSlots.duration=(rs.getString(4));   
-                objSlots.id++;
                 emplist.add(objSlots);
             }
         }catch (Exception e){

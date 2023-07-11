@@ -17,7 +17,7 @@ public class RecordsModifier {
    void deleteSlots(String selectedId, Response objResponse, Connection dbConnection) {
     try {
         PreparedStatement p;
-        p = dbConnection.prepareStatement("delete from slots where id=?");
+        p = dbConnection.prepareStatement("delete from slots where slotName=?");
         p.setString(1, selectedId);
         int rowsDeleted = p.executeUpdate();
         if (rowsDeleted > 0) {
