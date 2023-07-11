@@ -83,7 +83,7 @@ public class DALManager {
      
      
      
-      public void saveEmployee(SlotsDTO objSlots, Response objResponse) {
+      public void saveSlots(SlotsDTO objSlots, Response objResponse) {
         try{
             Connection  dbConnection = objConnection.getConnection();
             objAdder.saveSlots(objSlots,objResponse,dbConnection);            
