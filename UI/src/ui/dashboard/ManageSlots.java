@@ -34,6 +34,16 @@ public class ManageSlots extends javax.swing.JFrame {
         loadData();
         attachCheckboxListener(); // Attach listener to handle checkbox clicks
     }
+ public ManageSlots() {
+        initComponents();
+//        objectMainUI = aThis;
+        setTitle("Manage Slots");
+        this.setLocationRelativeTo(null);
+
+        objController = UTFactory.getInstanceOfController();
+        loadData();
+        attachCheckboxListener(); // Attach listener to handle checkbox clicks
+    }
 
     
 private void loadData(){
@@ -326,7 +336,7 @@ ArrayList<SlotsDTO> list = objController.viewSlots();
 
         jButton14.setBackground(new java.awt.Color(0, 204, 204));
         jButton14.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButton14.setText("UPDATE");
+        jButton14.setText("Add");
         jButton14.setBorder(null);
         jButton14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton14.addActionListener(new java.awt.event.ActionListener() {
