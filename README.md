@@ -9,9 +9,16 @@ Group Leader : BASIT IQBAL
 Group Members:
 1) BASIT IQBAL
 2) Fatima Aftab
-3) Waleed Rashid
-4) Ahmed Tariq
-5) Ebadat Nissa Khan
-6) Eissa Masood
+
+
+HOW TO RUN THE PROJECT:
+  Pre-requisits:
+      1. you should have a jdk version 18 
+      2. Install the MySQL workbench
+        a) import the schemas present in the database folder in your MySQL work bench.
+        b) Change the password and user name in the Src /DAL/DALManager.java file (it has a connection class you just have to put the 
+            username and password of your workbench in it.
+  Run the file:
+      Now! you are good to run the project. You just have to click on the Green Play button and it will start.
 
 
