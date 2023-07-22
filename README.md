@@ -16,8 +16,7 @@ HOW TO RUN THE PROJECT:
       1. you should have a jdk version 18 
       2. Install the MySQL workbench
         a) import the schemas present in the database folder in your MySQL work bench.
-        b) Change the password and user name in the Src /DAL/DALManager.java file (it has a connection class you just have to put the 
-            username and password of your workbench in it.
+        b) Change the password and user name in the Src /DAL/DALManager.java file (it has a connection class you just have to put the  username and password of your workbench in it.
   Run the file:
       Now! you are good to run the project. You just have to click on the Green Play button and it will start.
 
