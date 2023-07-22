@@ -439,6 +439,7 @@ ArrayList<CourseDTO> list = objController.viewCourses();
          Response objResponse =  objController.deleteCourses(selectedId);
          CommonHandler.handleResponse(objResponse, jLabel1);
          loadData(); 
+         
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
