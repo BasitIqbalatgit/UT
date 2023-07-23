@@ -28,3 +28,14 @@ The benefits of this proposed system are numerous. Firstly, it will eliminate th
       Now! you are good to run the project. You just have to click on the Green Play button and it will start.
 
 
+## Where to Download :
+
+  ### jdk version 18: 
+  
+          https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html
+
+  ### MySQL Workbench:
+
+          https://dev.mysql.com/downloads/workbench/
+
+
