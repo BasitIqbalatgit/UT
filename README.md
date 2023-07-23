@@ -20,6 +20,16 @@ The benefits of this proposed system are numerous. Firstly, it will eliminate th
       2. Install the MySQL workbench
       
         a) import the schemas present in the database folder in your MySQL work bench.
+
+          i) open MySQL Workbench
+
+          ii) Go to services
+
+          iii) click on import 
+
+          iv) select the path of the file by browsing 
+
+          v) Then click on import
         
         b) Change the password and user name in the Src /DAL/DALManager.java file (it has a connection class you just have to put the  username and password of your workbench in it.
         
