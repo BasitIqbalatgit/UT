@@ -485,10 +485,10 @@ ArrayList<CourseDTO> list = objController.viewCourses();
     private String getSelectedCoursesId() {
         if(jTable1.getSelectedRow() >= 0)
         {
-        return jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
+         return jTable1.getValueAt(jTable1.getSelectedRow(),0).toString();
         }
         else {
-        JOptionPane.showMessageDialog(this, "Select a record and then try again.");
+            JOptionPane.showMessageDialog(this, "Select a record and then try again.");
         }
         return null;
     }

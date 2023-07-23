@@ -22,7 +22,7 @@ public class DALManager {
     RecordsMapper objMapper;
      RecordsModifier objModifier;
      RecordsAdder objAdder;
-    //RecordsMapper mapper
+     
     public DALManager(){
         objConnection = new MySQLConnection("jdbc:mysql://localhost:3306/universitytimetable","root","BasitIqbal@050");
         objReader=new DBReader();
